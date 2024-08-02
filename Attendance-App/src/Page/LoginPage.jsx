@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function LoginPage() {
   return (
     <div>
@@ -17,7 +19,7 @@ export default function LoginPage() {
           <form className="space-y-6">
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                ID
+                EMPLOYEE ID
               </label>
               <div className="mt-2">
                 <input
@@ -35,14 +37,6 @@ export default function LoginPage() {
                 <label className="block text-sm font-medium leading-6 text-gray-900">
                   PASSWORD
                 </label>
-                <div className="text-sm">
-                  <a
-                    href=""
-                    className="font-semibold text-blue-500 hover:text-blue-400"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -56,12 +50,11 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
+              <Link to="/">
+                <button className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  Sign in
+                </button>
+              </Link>
             </div>
           </form>
         </div>
