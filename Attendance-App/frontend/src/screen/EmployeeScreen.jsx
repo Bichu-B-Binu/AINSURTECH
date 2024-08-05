@@ -1,5 +1,7 @@
+import { useState } from "react";
 import icon from "../../image/Icon.jpeg";
 export default function EmployeeScreen() {
+  const [btns, setBtns] = useState(false);
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -31,9 +33,24 @@ export default function EmployeeScreen() {
 
         <div className="px-4 pb-6">
           <div className="text-center my-4">
-            <button className="h-24 w-24 rounded-full border-4 border-white dark:border-blue-500 mx-auto my-4">
+            {/* <button className="h-24 w-24 rounded-full border-4 border-white dark:border-blue-500 mx-auto my-4">
               Check In
-            </button>
+            </button> */}
+            {btns ? (
+              <button
+                className="h-24 w-24 rounded-full border-4 border-white dark:border-blue-500 mx-auto my-4"
+                onClick={() => setBtns(!btns)}
+              >
+                Check In
+              </button>
+            ) : (
+              <button
+                className="h-24 w-24 rounded-full border-4 border-white dark:border-green-500 mx-auto my-4"
+                onClick={() => setBtns(!btns)}
+              >
+                Check out
+              </button>
+            )}
           </div>
         </div>
       </div>
