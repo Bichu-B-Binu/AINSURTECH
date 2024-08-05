@@ -4,9 +4,9 @@ import icon from "../../image/Icon.jpeg";
 // eslint-disable-next-line react/prop-types
 export default function NewMemberAdd({ setNewAdd }) {
   //   const navigate = useNavigate();
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   //   const handleCancel = () => {
 
   //   };
@@ -26,7 +26,7 @@ export default function NewMemberAdd({ setNewAdd }) {
               </div>
 
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
                       EMPLOYEE ID
@@ -37,7 +37,7 @@ export default function NewMemberAdd({ setNewAdd }) {
                         type="text"
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Please enter your employee id"
+                        placeholder="Please enter employee id"
                       />
                     </div>
                   </div>
@@ -52,7 +52,7 @@ export default function NewMemberAdd({ setNewAdd }) {
                         type="text"
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Please enter your employee id"
+                        placeholder="Please enter employee name"
                       />
                     </div>
                   </div>
@@ -69,7 +69,7 @@ export default function NewMemberAdd({ setNewAdd }) {
                         type="password"
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Please enter your password"
+                        placeholder="Please enter password"
                       />
                     </div>
                   </div>
@@ -86,39 +86,35 @@ export default function NewMemberAdd({ setNewAdd }) {
                         type="password"
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Please enter your password"
+                        placeholder="Please enter again the password"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <button className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {/* <button className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Register
-                    </button>
+                    </button> */}
+
+                    <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                      <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                        <button className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                          Register
+                        </button>
+                      </span>
+
+                      <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                        <button
+                          className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                          onClick={() => setNewAdd(false)}
+                        >
+                          Cancel
+                        </button>
+                      </span>
+                    </div>
                   </div>
                 </form>
               </div>
-            </div>
-
-            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-              <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                >
-                  Add
-                </button>
-              </span>
-
-              <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                  onClick={() => setNewAdd(false)}
-                >
-                  Cancel
-                </button>
-              </span>
             </div>
           </div>
         </div>
