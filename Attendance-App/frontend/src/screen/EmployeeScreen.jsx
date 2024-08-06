@@ -33,24 +33,14 @@ export default function EmployeeScreen() {
 
         <div className="px-4 pb-6">
           <div className="text-center my-4">
-            {/* <button className="h-24 w-24 rounded-full border-4 border-white dark:border-blue-500 mx-auto my-4">
-              Check In
-            </button> */}
-            {btns ? (
-              <button
-                className="h-24 w-24 rounded-full border-4 border-white dark:border-blue-500 mx-auto my-4"
-                onClick={() => setBtns(!btns)}
-              >
-                Check In
-              </button>
-            ) : (
-              <button
-                className="h-24 w-24 rounded-full border-4 border-white dark:border-green-500 mx-auto my-4"
-                onClick={() => setBtns(!btns)}
-              >
-                Check out
-              </button>
-            )}
+            <button
+              className={`${
+                btns ? "dark:border-blue-500" : "dark:border-green-500"
+              } h-24 w-24 rounded-full border-4 border-white mx-auto my-4`}
+              onClick={() => setBtns(!btns)}
+            >
+              {btns ? "Check In" : "Check Out"}
+            </button>
           </div>
         </div>
       </div>
