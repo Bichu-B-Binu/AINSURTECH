@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import bcryptjs from "bcryptjs";
 
 export const register = async (req, res) => {
   const { empName, empId, password } = req.body;
@@ -16,11 +17,14 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "Employee ID already exists" });
     }
 
+    //Create hash password
+    const hashPassword = bcryptjs.hashSync(password, 10);
+
     // Create a new user
     const newUser = new User({
       empName,
       empId,
-      password,
+      password: hashPassword,
     });
 
     await newUser.save();
