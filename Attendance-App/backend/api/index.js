@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRoutes from "./routes/user.route.js";
-
+import userRoutes from "./routes/userRouter.js";
+import authRoutes from "./routes/authRouter.js";
 dotenv.config();
 
 mongoose
@@ -16,8 +16,12 @@ mongoose
 
 const app = express();
 
-app.listen(3000, () => {
-  console.log("Server and backend is running on port 3000");
-});
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
+
+app.listen(3000, () => {
+  console.log("Server and backend are running on port 3000");
+});

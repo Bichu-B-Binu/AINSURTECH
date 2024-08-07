@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    employeeid: {
+    empName: {
+      type: String,
+      required: true,
+    },
+    empId: {
       type: String,
       required: true,
       unique: true,
