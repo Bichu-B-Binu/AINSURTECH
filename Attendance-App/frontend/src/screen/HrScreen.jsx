@@ -44,6 +44,9 @@ export default function HrScreen() {
           </div>
         )}
       </div>
+      <div className=" mt-52 text-center">
+        <p>{date.getFullYear()}</p>
+      </div>
     </>
   );
 }
