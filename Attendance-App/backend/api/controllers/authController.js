@@ -31,6 +31,7 @@ export const register = async (req, res, next) => {
 
     await newUser.save();
     // console.log("User created successfully:", newUser);
+    console.log("User created successfully:");
     res.json(newUser);
   } catch (error) {
     // console.error("Error while creating user:", error);

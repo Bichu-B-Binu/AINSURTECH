@@ -10,7 +10,7 @@ export default function HrLists() {
               <thead className="border-b border-neutral-200 bg-[#237dde] font-medium text-white dark:border-white/10">
                 <tr>
                   <th scope="col" className=" px-4 py-4">
-                    Time
+                    Pic
                   </th>
                   <th scope="col" className=" px-4 py-4">
                     Employee ID

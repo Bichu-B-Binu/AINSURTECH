@@ -1,15 +1,43 @@
-// import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import icon from "../../image/Icon.jpeg";
-
 // eslint-disable-next-line react/prop-types
-export default function NewMemberAdd({ setNewAdd }) {
-  //   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  //   const handleCancel = () => {
+export default function NewMemberAdd({ setActionBtn }) {
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  //   };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+  // console.log(formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.empName || !formData.empId || !formData.password) {
+      return setErrorMessage("Please fill out of all feilds");
+    }
+
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        setActionBtn(false);
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -29,30 +57,30 @@ export default function NewMemberAdd({ setNewAdd }) {
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
-                      EMPLOYEE ID
+                      EMPLOYEE NAME
                     </label>
                     <div className="mt-2">
                       <input
-                        name="userId"
                         type="text"
-                        required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Please enter employee id"
+                        id="empName"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
-                      EMPLOYEE NAME
+                      EMPLOYEE ID
                     </label>
                     <div className="mt-2">
                       <input
-                        name="userId"
                         type="text"
-                        required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Please enter employee name"
+                        id="empId"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -67,46 +95,37 @@ export default function NewMemberAdd({ setNewAdd }) {
                       <input
                         name="password"
                         type="password"
-                        required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Please enter password"
+                        id="password"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between">
-                      <label className="block text-sm font-medium leading-6 text-gray-900">
-                        CONFORM PASSWORD
-                      </label>
-                    </div>
-                    <div className="mt-2">
-                      <input
-                        name="password"
-                        type="password"
-                        required
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Please enter again the password"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    {/* <button className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                      Register
-                    </button> */}
-
                     <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                       <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                          Register
+                        <button
+                          className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                          type="submit"
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              {/* <Spinner color="amber" /> */}
+                              <span className="">Loading...</span>
+                            </>
+                          ) : (
+                            "Register"
+                          )}
                         </button>
                       </span>
 
                       <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                         <button
                           className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                          onClick={() => setNewAdd(false)}
+                          onClick={() => setActionBtn(false)}
                         >
                           Cancel
                         </button>
@@ -114,6 +133,17 @@ export default function NewMemberAdd({ setNewAdd }) {
                     </div>
                   </div>
                 </form>
+
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    className="flex w-full my-2 px-1 py-1 text-base text-red-600 border border-red-600 rounded-lg font-regular"
+                  >
+                    <div className="mr-12">
+                      <span>{errorMessage}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

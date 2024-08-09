@@ -3,7 +3,7 @@ import HrLists from "../components/HrLists";
 import NewMemberAdd from "../components/NewMemberAdd";
 
 export default function HrScreen() {
-  const [newAdd, setNewAdd] = useState(false);
+  const [ActionBtn, setActionBtn] = useState(false);
   const date = new Date();
   const formattedDate = date.toLocaleDateString();
 
@@ -24,7 +24,7 @@ export default function HrScreen() {
         <h4>{`Date:${formattedDate}`}</h4>
         <div className="">
           <button
-            onClick={() => setNewAdd(true)}
+            onClick={() => setActionBtn(true)}
             className=" me-4 bg-green-600 px-6 py-1 rounded text-white hover:bg-green-400"
           >
             Add
@@ -36,8 +36,8 @@ export default function HrScreen() {
       </div>
 
       <div>
-        {newAdd ? (
-          <NewMemberAdd setNewAdd={setNewAdd} />
+        {ActionBtn ? (
+          <NewMemberAdd setActionBtn={setActionBtn} />
         ) : (
           <div className="container mx-auto">
             <HrLists />
