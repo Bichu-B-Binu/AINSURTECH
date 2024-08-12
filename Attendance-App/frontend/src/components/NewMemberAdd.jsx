@@ -25,6 +25,17 @@ export default function NewMemberAdd({ setActionBtn }) {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log(data._id);
+
+      // const getRes = await fetch(`/api/auth/register${data._id}`, {
+      //   method: "GET",
+      //   headers: { "Content-Type": "application/json" },
+      //   // body: JSON.stringify(formData),
+      // });
+
+      // const get = await getRes.json();
+      // console.log(get);
+
       if (data.success === false) {
         return setErrorMessage(data.message);
       }
