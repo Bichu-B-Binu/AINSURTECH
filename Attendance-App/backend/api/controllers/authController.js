@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   const { empName, empId, password } = req.body;
@@ -8,7 +9,6 @@ export const register = async (req, res, next) => {
 
   // Check for required fields
   if (!empName || !empId || !password) {
-    // return res.status(400).json({ message: "All fields are required" });
     next(errorHandler(400, "All fields are required"));
   }
 
@@ -36,6 +36,38 @@ export const register = async (req, res, next) => {
   } catch (error) {
     // console.error("Error while creating user:", error);
     // res.status(500).json({ message: error.message });
+    next(error);
+  }
+};
+
+export const signIn = async (req, res, next) => {
+  const { empId, password } = req.body;
+
+  // Check for required fields
+  if (!empId || !password) {
+    next(errorHandler(400, "All fields are required"));
+  }
+
+  try {
+    const validEmpId = await User.findOne({ empId });
+    if (!validEmpId) {
+      return next(errorHandler(404, "Employee not found"));
+    }
+    const validPassword = bcryptjs.compareSync(password, validEmpId.password);
+
+    if (!validPassword) {
+      return next(errorHandler(400, "Invalid password"));
+    }
+    const { password: pass, ...rest } = validEmpId._doc;
+
+    const token = jwt.sign({ id: validEmpId._id }, process.env.JWT_SECRET);
+    res
+      .status(200)
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .json(rest);
+  } catch (error) {
     next(error);
   }
 };
