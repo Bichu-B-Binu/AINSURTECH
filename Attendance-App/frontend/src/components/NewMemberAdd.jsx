@@ -9,7 +9,6 @@ export default function NewMemberAdd({ setActionBtn }) {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
-  // console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.empName || !formData.empId || !formData.password) {
@@ -26,15 +25,6 @@ export default function NewMemberAdd({ setActionBtn }) {
       });
       const data = await res.json();
       console.log(data._id);
-
-      // const getRes = await fetch(`/api/auth/register${data._id}`, {
-      //   method: "GET",
-      //   headers: { "Content-Type": "application/json" },
-      //   // body: JSON.stringify(formData),
-      // });
-
-      // const get = await getRes.json();
-      // console.log(get);
 
       if (data.success === false) {
         return setErrorMessage(data.message);
@@ -124,7 +114,6 @@ export default function NewMemberAdd({ setActionBtn }) {
                         >
                           {loading ? (
                             <>
-                              {/* <Spinner color="amber" /> */}
                               <span className="">Loading...</span>
                             </>
                           ) : (
