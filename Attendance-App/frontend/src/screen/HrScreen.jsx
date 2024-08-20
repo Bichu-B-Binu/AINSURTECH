@@ -4,6 +4,8 @@ import NewMemberAdd from "../components/NewMemberAdd";
 
 export default function HrScreen() {
   const [ActionBtn, setActionBtn] = useState(false);
+  const [actionDelete, setActionDelete] = useState(false);
+
   const date = new Date();
   const formattedDate = date.toLocaleDateString();
 
@@ -29,7 +31,12 @@ export default function HrScreen() {
           >
             Add
           </button>
-          <button className=" me-2 bg-red-600 px-6 py-1 rounded text-white hover:bg-red-400">
+          <button
+            onClick={() => {
+              setActionDelete(!actionDelete);
+            }}
+            className=" me-2 bg-red-600 px-6 py-1 rounded text-white hover:bg-red-400"
+          >
             Delete
           </button>
         </div>
@@ -40,7 +47,10 @@ export default function HrScreen() {
           <NewMemberAdd setActionBtn={setActionBtn} />
         ) : (
           <div className="container mx-auto">
-            <HrLists />
+            <HrLists
+              setActionDelete={setActionDelete}
+              actionDelete={actionDelete}
+            />
           </div>
         )}
       </div>

@@ -1,10 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import icon from "../../image/Icon.jpeg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 export default function LoginPage() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
+  const datas = useSelector((state) => state.user);
+  console.log(datas);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -13,12 +23,11 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.empId || !formData.password) {
-      return setErrorMessage("Please fill out of all feilds");
+      return dispatch(signInFailure("Please fill out of all feilds"));
     }
 
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signIn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,19 +35,18 @@ export default function LoginPage() {
       });
       console.log(res);
       const data = await res.json();
-      console.log(data._id);
+      console.log(data);
 
       if (data.success === false) {
-        return setErrorMessage(data.message);
+        dispatch(signInFailure(data.message));
       }
-      setLoading(false);
 
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 

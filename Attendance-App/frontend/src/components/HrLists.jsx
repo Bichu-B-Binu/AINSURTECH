@@ -1,6 +1,7 @@
 import HrListBody from "./HrListBody";
 
-export default function HrLists() {
+// eslint-disable-next-line react/prop-types
+export default function HrLists({ actionDelete, setActionDelete }) {
   return (
     <>
       <div className="flex flex-col">
@@ -28,7 +29,10 @@ export default function HrLists() {
               </thead>
               <tbody>
                 <tr className="border-b text-zinc-950 border-neutral-200 dark:border-white/10">
-                  <HrListBody />
+                  <HrListBody
+                    actionDelete={actionDelete}
+                    setActionDelete={setActionDelete}
+                  />
                 </tr>
               </tbody>
             </table>

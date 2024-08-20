@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import icon from "../../image/Icon.jpeg";
+// import { useSelector } from "react-redux";
+
 export default function EmployeeScreen() {
   const [btns, setBtns] = useState(false);
+  // const details = useSelector((state) => state.user);
+  // console.log(details);
+
+  // useEffect(() => {}, []);
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

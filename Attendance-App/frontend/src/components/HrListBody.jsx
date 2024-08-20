@@ -1,4 +1,5 @@
-export default function HrListBody() {
+// eslint-disable-next-line react/prop-types
+export default function HrListBody({ actionDelete, setActionDelete }) {
   return (
     <>
       <td className="whitespace-nowrap  px-6 py-4 font-medium">
@@ -28,6 +29,18 @@ export default function HrListBody() {
           time
         </div>
       </td>
+      {actionDelete && (
+        <td className="whitespace-nowra font-medium">
+          <button
+            onClick={() => {
+              setActionDelete(false);
+            }}
+            className=" bg-red-600 px-1 py-1 rounded text-white hover:bg-red-400"
+          >
+            Delete
+          </button>
+        </td>
+      )}
     </>
   );
 }
