@@ -4,10 +4,13 @@ import icon from "../../image/Icon.jpeg";
 
 export default function EmployeeScreen() {
   const [btns, setBtns] = useState(false);
+  // const [name, setName] = useState({});
   // const details = useSelector((state) => state.user);
-  // console.log(details);
 
-  // useEffect(() => {}, []);
+  // useEffect(() => {
+  //   setName(details);
+  //   console.log(name);
+  // }, []);
 
   return (
     <>
@@ -32,7 +35,7 @@ export default function EmployeeScreen() {
             />
             <div className="py-2">
               <h3 className="font-bold text-2xl text-gray-800 dark:text-gray mb-1">
-                Full Name
+                full name{" "}
               </h3>
             </div>
           </div>
