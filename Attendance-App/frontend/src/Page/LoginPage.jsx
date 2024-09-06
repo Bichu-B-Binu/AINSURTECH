@@ -11,8 +11,8 @@ export default function LoginPage() {
   const [formData, setFormData] = useState({});
 
   const { loading, error: errorMessage } = useSelector((state) => state.user);
-  const datas = useSelector((state) => state.user);
-  console.log(datas);
+  const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
