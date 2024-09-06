@@ -1,17 +1,46 @@
 import { useEffect, useState } from "react";
 import icon from "../../image/Icon.jpeg";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function EmployeeScreen() {
   const [btns, setBtns] = useState(false);
-  // const [name, setName] = useState({});
-  // const details = useSelector((state) => state.user);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // Retrieve and parse data from localStorage
+    const storedData = localStorage.getItem("persist:root");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+
+      // Extract and parse user data
+      const userString = parsedData.user;
+      if (userString) {
+        const userObject = JSON.parse(userString);
+        setUserData(userObject.currentUser);
+      }
+    }
+  }, []);
 
   // useEffect(() => {
-  //   setName(details);
-  //   console.log(name);
+  //   const storedData = localStorage.getItem("persist:root");
+  //   if (storedData) {
+  //     try {
+  //       const parsedData = JSON.parse(storedData);
+  //       const userString = parsedData.user;
+  //       if (userString) {
+  //         const userObject = JSON.parse(userString);
+  //         setUserData(userObject.currentUser);
+  //       } else {
+  //         console.error("No user data found in localStorage.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error parsing localStorage data:", error);
+  //     }
+  //   } else {
+  //     console.error("No data found in localStorage.");
+  //   }
   // }, []);
-
+  // console.log(userData);
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -22,7 +51,8 @@ export default function EmployeeScreen() {
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Welcome
+            {/* {userData.empName} */}
+            name
           </h2>
         </div>
 
@@ -35,7 +65,8 @@ export default function EmployeeScreen() {
             />
             <div className="py-2">
               <h3 className="font-bold text-2xl text-gray-800 dark:text-gray mb-1">
-                full name{" "}
+                {/* {userData.empId} */}
+                id
               </h3>
             </div>
           </div>
