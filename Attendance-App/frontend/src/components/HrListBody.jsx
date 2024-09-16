@@ -1,5 +1,13 @@
 // eslint-disable-next-line react/prop-types
+import {useEffect, useState} from 'react'
 export default function HrListBody({ actionDelete, setActionDelete }) {
+  const [userData, setUserData] = useState(null);
+ 
+    useEffect(() => {
+        fetch('/api/user')
+            .then(response => response.json())
+            .then(data => setUserData(data));
+    }, []);
   return (
     <>
       <td className="whitespace-nowrap  px-6 py-4 font-medium">
