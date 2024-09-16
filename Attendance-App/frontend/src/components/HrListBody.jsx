@@ -1,5 +1,10 @@
 // eslint-disable-next-line react/prop-types
 export default function HrListBody({ actionDelete, setActionDelete }) {
+  useEffect(() => {
+    return () => {
+      effect;
+    };
+  }, [input]);
   return (
     <>
       <td className="whitespace-nowrap  px-6 py-4 font-medium">
