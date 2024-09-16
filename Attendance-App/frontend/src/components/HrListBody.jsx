@@ -8,6 +8,8 @@ export default function HrListBody({ actionDelete, setActionDelete }) {
             .then(response => response.json())
             .then(data => setUserData(data));
     }, []);
+    console.log(userData);
+    
   return (
     <>
       <td className="whitespace-nowrap  px-6 py-4 font-medium">
