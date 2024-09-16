@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRouter.js";
 import authRoutes from "./routes/authRouter.js";
+import cors from 'cors'
+
 dotenv.config();
 
 mongoose
@@ -15,6 +17,7 @@ mongoose
   });
 
 const app = express();
+app.use(cors())
 
 // Middleware to parse JSON bodies
 app.use(express.json());
